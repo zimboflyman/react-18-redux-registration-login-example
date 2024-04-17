@@ -1,54 +1,56 @@
-import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 
-import { Template } from 'template';
-import { history } from '_helpers';
-import { Nav, Alert, PrivateRoute } from '_components';
-import { Home } from 'home';
-import { AccountLayout } from 'account';
-import { UsersLayout } from 'users';
+import { Template } from "template";
+import { history } from "_helpers";
+import { Nav, Alert, PrivateRoute } from "_components";
+import { Home } from "home";
+import { AccountLayout } from "account";
+import { UsersLayout } from "users";
 
 export { App };
 
 const headerProps = {
-    serviceName: 'MOJ - XHIBIT Portals',
-    navigation: [
-      {
-        children: 'Home',
-        to: '/',
-      },
-      {
-        children: 'AccountLayout',
-        to: '/account/',
-      },
-    ],
-  };
+  serviceName: "MOJ - XHIBIT Portals",
+  // navigation: [
+  //   {
+  //     children: "Home",
+  //     to: "/",
+  //   },
+  //   {
+  //     children: "AccountLayout",
+  //     to: "/account/",
+  //   },
+  // ],
+};
 
 function App() {
-    // init custom history object to allow navigation from 
-    // anywhere in the react app (inside or outside components)
-    history.navigate = useNavigate();
-    history.location = useLocation();
+  // init custom history object to allow navigation from
+  // anywhere in the react app (inside or outside components)
+  history.navigate = useNavigate();
+  history.location = useLocation();
 
-    return (
-        <Template header={headerProps}>
-            <Nav />
-            {/* <Alert /> */}
-                <Routes>
-                    {/* private */}
-                    <Route element={<PrivateRoute />}>
-                        <Route path="/" element={<Home />} />
-                        <Route path="users/*" element={<UsersLayout />} />
-                    </Route>
+  return (
+    <Template header={headerProps}>
+      <Nav />
+      {/* Alert will need replacing into ErrorSummary component */}
+      <Alert />
+      <Routes>
+        {/* private */}
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<Home />} />
+          <Route path="users/*" element={<UsersLayout />} />
+        </Route>
 
-                    {/* public */}
-                    <Route path="account/*" element={<AccountLayout />} />
-                    <Route path="*" element={<Navigate to="/" />} />
-                </Routes>
-            </Template>
-            
-            // <Template header={headerProps}>
-            // <Nav />
-            // <div>testing</div>
-            // </Template>
-    );
+        {/* public */}
+        <Route path="account/*" element={<AccountLayout />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Template>
+  );
 }
