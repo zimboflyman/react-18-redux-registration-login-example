@@ -138,7 +138,7 @@ function Home() {
                   type="submit"
                   id="continue"
                   class="govuk-button"
-                  formnovalidate=""
+                  formNoValidate=""
                   data-module="govuk-button"
                   data-prevent-double-click="true"
                 >

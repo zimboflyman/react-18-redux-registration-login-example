@@ -72,50 +72,75 @@ function Login() {
             </div>
 
             <div class="govuk-grid-column-one-half">
-              <fieldset class="govuk-fieldset">
-                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                  <h1 class="govuk-fieldset__heading">Sign in</h1>
-                </legend>
-                <div class="govuk-form-group">
-                  <label class="govuk-label" for="U-id">
-                    User ID
-                  </label>
-                  <input
-                    class="govuk-input"
-                    id="U-id"
-                    name="password"
-                    type="text"
-                    autocomplete="password"
-                  ></input>
-                </div>
-                <div class="govuk-form-group">
-                  <label class="govuk-label" for="password">
-                    Password
-                  </label>
-                  <input
-                    class="govuk-input"
-                    id="password"
-                    name="password"
-                    type="text"
-                    autocomplete="password"
-                  ></input>
-                </div>
-              </fieldset>
-
-              {/* //use an actual button here! */}
-              <a
-                href="views/landing"
-                class="govuk-button"
-                data-module="govuk-button"
-              >
-                Sign in
-              </a>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <fieldset class="govuk-fieldset" role="group">
+                  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">Sign in</h1>
+                  </legend>
+                  <div
+                    className={`govuk-form-group ${
+                      errors.username ? "govuk-form-group--error" : ""
+                    }`}
+                  >
+                    <label class="govuk-label" for="U-id">
+                      User ID
+                    </label>
+                    <p id="username-error" class="govuk-error-message">
+                      <span class="govuk-visually-hidden">Error:</span>
+                      {errors.username?.message}
+                    </p>
+                    <input
+                      name="username"
+                      type="text"
+                      {...register("username")}
+                      className={`govuk-input ${
+                        errors.username ? "is-invalid" : ""
+                      }`}
+                    ></input>
+                  </div>
+                  <div
+                    className={`govuk-form-group ${
+                      errors.password ? "govuk-form-group--error" : ""
+                    }`}
+                  >
+                    <label class="govuk-label" for="password">
+                      Password
+                    </label>
+                    <p id="username-error" class="govuk-error-message">
+                      <span class="govuk-visually-hidden">Error:</span>
+                      {errors.password?.message}
+                    </p>
+                    <input
+                      class="govuk-input"
+                      id="password"
+                      name="password"
+                      autocomplete="password"
+                      type="password"
+                      {...register("password")}
+                      className={`govuk-input ${
+                        errors.password ? "is-invalid" : ""
+                      }`}
+                    ></input>
+                  </div>
+                </fieldset>
+                <button
+                  disabled={isSubmitting}
+                  type="submit"
+                  class="govuk-button"
+                  data-module="govuk-button"
+                >
+                  {isSubmitting && (
+                    <span className="spinner-border spinner-border-sm me-1"></span>
+                  )}
+                  Sign in
+                </button>
+              </form>
             </div>
           </div>
         </main>
       </div>
 
-      <div className="card m-3">
+      {/* <div className="card m-3">
         <h4 className="card-header">Login</h4>
         <div className="card-body">
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -154,7 +179,7 @@ function Login() {
             </Link>
           </form>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
