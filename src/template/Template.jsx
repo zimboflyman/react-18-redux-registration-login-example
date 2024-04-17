@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 // import { Helmet } from 'react-helmet';
 // import favicon from 'node_modules/govuk-frontend/dist/govuk/assets/images/favicon.ico';
 // import govukMaskIcon from 'govuk-frontend/govuk/assets/images/govuk-mask-icon.svg';
@@ -11,7 +11,8 @@ import React, { useEffect } from 'react';
 // import { SkipLink, Header, Footer } from '..';
 // import { Header } from 'govuk-frontend';
 
-import { Header } from '../_components/header';
+import { Header } from "../_components/header";
+import { Footer } from "../_components/footer";
 
 function Template(props) {
   const {
@@ -28,8 +29,8 @@ function Template(props) {
   } = props;
 
   useEffect(() => {
-    document.documentElement.classList.add('govuk-template');
-    document.body.classList.add('js-enabled', 'govuk-template__body');
+    document.documentElement.classList.add("govuk-template");
+    document.body.classList.add("js-enabled", "govuk-template__body");
   }, []);
 
   return (
@@ -67,10 +68,10 @@ function Template(props) {
 
       <Header {...header} />
 
-      <div className={`govuk-width-container ${containerClassName || ''}`}>
+      <div className={`govuk-width-container ${containerClassName || ""}`}>
         {beforeContent}
         <main
-          className={`govuk-main-wrapper ${mainClassName || ''}`}
+          className={`govuk-main-wrapper ${mainClassName || ""}`}
           id="main-content"
           role="main"
           lang={mainLang || null}
@@ -79,20 +80,20 @@ function Template(props) {
         </main>
       </div>
 
-      {/* <Footer {...footer} /> */}
+      <Footer {...footer} />
     </>
   );
 }
 
 Template.defaultProps = {
-  title: 'GOV.UK - The best place to find government services and information',
+  title: "GOV.UK - The best place to find government services and information",
   skipLink: {
-    href: '#main-content',
-    children: 'Skip to main content',
+    href: "#main-content",
+    children: "Skip to main content",
   },
   header: {},
   footer: {},
-  beforeContent: '',
+  beforeContent: "",
 };
 
 export { Template };
