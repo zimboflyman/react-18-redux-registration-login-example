@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 
+import { Template } from 'template';
 import { history } from '_helpers';
 import { Nav, Alert, PrivateRoute } from '_components';
 import { Home } from 'home';
@@ -8,6 +9,20 @@ import { UsersLayout } from 'users';
 
 export { App };
 
+const headerProps = {
+    serviceName: 'MOJ - XHIBIT Portals',
+    navigation: [
+      {
+        children: 'Home',
+        to: '/',
+      },
+      {
+        children: 'AccountLayout',
+        to: '/account/',
+      },
+    ],
+  };
+
 function App() {
     // init custom history object to allow navigation from 
     // anywhere in the react app (inside or outside components)
@@ -15,21 +30,25 @@ function App() {
     history.location = useLocation();
 
     return (
-        <div className="app-container bg-light">
+        <Template header={headerProps}>
             <Nav />
-            <Alert />
-            <div className="container pt-4 pb-4">
+            {/* <Alert /> */}
                 <Routes>
                     {/* private */}
                     <Route element={<PrivateRoute />}>
                         <Route path="/" element={<Home />} />
                         <Route path="users/*" element={<UsersLayout />} />
                     </Route>
+
                     {/* public */}
                     <Route path="account/*" element={<AccountLayout />} />
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
-            </div>
-        </div>
+            </Template>
+            
+            // <Template header={headerProps}>
+            // <Nav />
+            // <div>testing</div>
+            // </Template>
     );
 }
